@@ -1,7 +1,12 @@
 <template>
   <div class="btn-group" name="HeaderSettings">
-    <button class="btn btn-default dropdown-toggle" ref="dropdownBtn" type="button">
-      <font-awesome-icon :icon="[usingBak && 'text-info', processingCls || 'cog']"></font-awesome-icon>
+    <button
+      class="btn btn-default dropdown-toggle"
+      :class="{'text-info': usingBak}"
+      ref="dropdownBtn"
+      type="button"
+    >
+      <font-awesome-icon :icon="processingCls || 'cog'"></font-awesome-icon>
       <span class="caret"></span>
     </button>
     <div class="dropdown-menu clearfix" :style="drpMenuStyle">

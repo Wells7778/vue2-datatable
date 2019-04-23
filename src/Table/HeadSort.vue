@@ -1,5 +1,5 @@
 <template>
-  <a href="#" @click.prevent="handleClick" name="HeadSort">
+  <a href="#" @click.prevent="handleClick" name="HeadSort" :class="{'text-muted': !order}">
     <font-awesome-icon :icon="cls"></font-awesome-icon>
   </a>
 </template>
@@ -19,13 +19,13 @@ export default {
   computed: {
     cls() {
       const { order } = this;
-      return [
-        {
-          "sort text-muted": !order,
-          "sort-up": order === "asc",
-          "sort-down": order === "desc"
-        }
-      ];
+      if (!order) {
+        return "sort";
+      } else if (order === "asc") {
+        return "sort-up";
+      } else if (order === "desc") {
+        return "sort-down";
+      }
     }
   },
   watch: {
