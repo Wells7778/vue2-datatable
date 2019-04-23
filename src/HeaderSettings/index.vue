@@ -33,14 +33,14 @@
             <ul class="dropdown-menu">
               <li @click="apply(true)">
                 <a href="#" @click.prevent>
-                  <font-awesome-icon icon="floppy-o"></font-awesome-icon>
+                  <font-awesome-icon icon="save"></font-awesome-icon>
                   &nbsp;
                   {{ $i18nForDatatable('Apply and backup settings to local') }}
                 </a>
               </li>
               <li v-if="usingBak" @click="rmBackup()">
                 <a href="#" @click.prevent>
-                  <font-awesome-icon icon="trash-o text-danger"></font-awesome-icon>
+                  <font-awesome-icon icon="trash-alt text-danger"></font-awesome-icon>
                   &nbsp;
                   {{ $i18nForDatatable('Clear local settings backup and restore') }}
                 </a>
@@ -143,7 +143,7 @@ export default {
       $(this.$el).toggleClass("open");
     },
     showProcessing() {
-      ["fa-spinner fa-pulse", "fa-check", ""].forEach((cls, idx) => {
+      ["spinner pulse", "check", ""].forEach((cls, idx) => {
         setTimeout(() => {
           this.processingCls = cls;
         }, idx * 1000);
