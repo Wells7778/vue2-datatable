@@ -1,8 +1,6 @@
 <template>
   <ul class="-col-group" name="ColumnGroup">
-    <label class="-col-group-title">
-      {{ groupName === 'undefined' ? 'Columns' : groupName }}
-    </label>
+    <label class="-col-group-title">{{ groupName === 'undefined' ? 'Columns' : groupName }}</label>
     <li v-for="(col, idx) in columns">
       <input
         type="checkbox"
@@ -10,19 +8,25 @@
         :name="groupName"
         :checked="isColVisible(col)"
         :disabled="typeof col.visible === 'string'"
-        @change="handleChange(col, $event.target.checked)">
+        @change="handleChange(col, $event.target.checked)"
+      >
       <label :for="uuidGen(col.field || idx)">
         {{ col.label || col.title }}
-        <i v-if="col.explain" class="fa fa-info-circle" style="cursor: help" :title="col.explain"></i>
+        <font-awesome-icon
+          v-if="col.explain"
+          icon="info-circle"
+          style="cursor: help"
+          :title="col.explain"
+        ></font-awesome-icon>
       </label>
     </li>
   </ul>
 </template>
 <script>
-import isColVisible from '../_utils/isColVisible'
+import isColVisible from "../_utils/isColVisible";
 
 export default {
-  name: 'ColumnGroup',
+  name: "ColumnGroup",
   props: {
     groupName: { type: String, required: true },
     columns: { type: Array, required: true }
@@ -31,22 +35,22 @@ export default {
     changes: [] // record the changes with a stack
   }),
   methods: {
-    handleChange (col, isChecked) {
-      this.changes.push({ col, isChecked })
+    handleChange(col, isChecked) {
+      this.changes.push({ col, isChecked });
     },
-    uuidGen (key) {
+    uuidGen(key) {
       // $vm._uid is a private property of a Vue instance
-      return `-col-${this._uid}-${key}`
+      return `-col-${this._uid}-${key}`;
     },
-    apply () {
+    apply() {
       this.changes.forEach(({ col, isChecked }) => {
-        this.$set(col, 'visible', isChecked)
-      })
-      this.changes = [] // don't forget to clear the stack
+        this.$set(col, "visible", isChecked);
+      });
+      this.changes = []; // don't forget to clear the stack
     },
     isColVisible
   }
-}
+};
 </script>
 <style>
 .-col-group {

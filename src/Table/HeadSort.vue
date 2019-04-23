@@ -1,6 +1,6 @@
 <template>
   <a href="#" @click.prevent="handleClick" name="HeadSort">
-    <i :class="cls"></i>
+    <font-awesome-icon :icon="cls"></font-awesome-icon>
   </a>
 </template>
 <script>
@@ -8,41 +8,41 @@
  * Sorting arrows within <th>
  */
 export default {
-  name: 'HeadSort',
+  name: "HeadSort",
   props: {
     field: { type: String, required: true },
     query: { type: Object, required: true }
   },
   data: () => ({
-    order: ''
+    order: ""
   }),
   computed: {
-    cls () {
-      const { order } = this
+    cls() {
+      const { order } = this;
       return [
-        'fa',
-        { 'fa-sort text-muted': !order,
-          'fa-sort-up': order === 'asc',
-          'fa-sort-down': order === 'desc'
+        {
+          "sort text-muted": !order,
+          "sort-up": order === "asc",
+          "sort-down": order === "desc"
         }
-      ]
+      ];
     }
   },
   watch: {
     query: {
-      handler ({ sort: field, order }) {
-        this.order = field === this.field ? order : ''
+      handler({ sort: field, order }) {
+        this.order = field === this.field ? order : "";
       },
       deep: true,
       immediate: true
     }
   },
   methods: {
-    handleClick () {
-      const { query, order } = this
-      query.sort = this.field
-      query.order = this.order = order === 'desc' ? 'asc' : 'desc'
+    handleClick() {
+      const { query, order } = this;
+      query.sort = this.field;
+      query.order = this.order = order === "desc" ? "asc" : "desc";
     }
   }
-}
+};
 </script>
